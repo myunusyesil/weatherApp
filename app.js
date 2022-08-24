@@ -6,9 +6,8 @@ let fetchUrl = '';
 
 const container = document.querySelector('.content-container');
 const input = document.querySelector('#search-area');
-
 const searchBtn = document.querySelector('.search-btn');
-const clearBtn = document.querySelector('.clear-btn');
+
 
 searchBtn.addEventListener('click', function (e) {
     e.preventDefault();
@@ -19,7 +18,6 @@ searchBtn.addEventListener('click', function (e) {
     fetch(fetchUrl).then((response) => {
         return response.json();}).then(  
             (data => {
-            console.log(data);
             let city = data.name;
             let temp = data.main.temp;
             let desc = data.weather[0].description;
@@ -34,23 +32,35 @@ searchBtn.addEventListener('click', function (e) {
             <p class="temp">${temp} °C</p>
             <p class="desc">${desc}</p>
             <p class="min-max">Min ${min} °C / Max ${max} °C</p>
+            <button class="clear-btn"><i class="bi bi-x p-1"></i>Clear</button>
             `
             container.appendChild(el);
-        })).catch( (err) => {
+           
+
+            const clearBtns = document.querySelectorAll('.clear-btn');
+            // console.log(clearBtns)
+            clearBtns.forEach(element => {
+                element.addEventListener('click', function (e) {
+                    let thisCard = e.currentTarget.parentElement;
+                    thisCard.remove();
+                })
+            });
+         
+        })).catch((err) => {
             console.log("bla bla bla")
             showDanger();
-        }
-        )
-               
-
-    console.log(fetchUrl)
+        })
+        input.value = "";
+     
+           
 });
 
-clearBtn.addEventListener('click', function(e){
+    const clearAll = document.querySelector('.clear-all');
+    clearAll.addEventListener('click', (e)=> {
     e.preventDefault();
-    const content = document.querySelector('.content');
-    container.removeChild(content);
+    container.innerHTML = '';
 })
+
 
 function showDanger () {
     const text = document.querySelector('.danger-text');
@@ -59,3 +69,4 @@ function showDanger () {
     text.classList.remove('show-text'); 
     },2000)
 }
+

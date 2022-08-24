@@ -9,7 +9,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     background-image: url(/25501.jpg);
-    height: 100vh;
+    height: auto;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -30,7 +30,7 @@ form input {
     
 }
 
-.search-btn, .clear-btn {
+.search-btn, .clear-btn, .clear-all {
     background-color: rgb(20, 58, 91);
     color: whitesmoke;
     border: none;
@@ -38,7 +38,7 @@ form input {
     border-radius: 4px;   
 }
 
-.clear-btn {
+.clear-btn, .clear-all {
     background-color: rgb(83, 6, 47);
 }
 
